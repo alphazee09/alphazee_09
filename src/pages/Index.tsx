@@ -306,7 +306,7 @@ const Index = () => {
             <div className="space-y-6">
               <div className="relative">
                 <img 
-                  src="/mazinyahia.png" 
+                  src="/dev_profile.png" 
                   alt="Mazin Yahia Profile" 
                   className="w-64 h-64 rounded-full mx-auto lg:mx-0 object-cover border-4 border-gradient-to-r from-cyan-500 to-purple-600"
                 />

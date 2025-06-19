@@ -6,6 +6,7 @@ import { Card } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Separator } from "@/components/ui/separator";
+import InlineSpinner from "@/components/InlineSpinner";
 import { 
   Eye, 
   EyeOff, 
@@ -249,7 +250,7 @@ const Login = () => {
               >
                 {isLoading ? (
                   <div className="flex items-center justify-center">
-                    <div className="w-5 h-5 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2"></div>
+                    <InlineSpinner size="sm" color="white" className="mr-2" />
                     Signing in...
                   </div>
                 ) : (

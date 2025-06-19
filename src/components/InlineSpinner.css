@@ -1,0 +1,140 @@
+/* Inline Spinner Styles */
+
+.inline-spinner {
+  display: inline-block;
+  position: relative;
+  vertical-align: middle;
+}
+
+/* Size variants */
+.inline-spinner-xs {
+  --spinner-size: 12px;
+}
+
+.inline-spinner-sm {
+  --spinner-size: 16px;
+}
+
+.inline-spinner-md {
+  --spinner-size: 20px;
+}
+
+/* Spinner ring */
+.spinner-ring {
+  width: var(--spinner-size);
+  height: var(--spinner-size);
+  position: relative;
+  animation: spin-fast 1s linear infinite;
+}
+
+.ring-segment {
+  position: absolute;
+  width: 3px;
+  height: 3px;
+  border-radius: 50%;
+  background: currentColor;
+  box-shadow: 0 0 4px currentColor;
+}
+
+.ring-segment:nth-child(1) {
+  top: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: segment-pulse 1s ease-in-out infinite;
+}
+
+.ring-segment:nth-child(2) {
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  animation: segment-pulse 1s ease-in-out infinite 0.33s;
+}
+
+.ring-segment:nth-child(3) {
+  bottom: 0;
+  left: 50%;
+  transform: translateX(-50%);
+  animation: segment-pulse 1s ease-in-out infinite 0.66s;
+}
+
+/* Spinner core */
+.spinner-core {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 2px;
+  height: 2px;
+  background: currentColor;
+  border-radius: 50%;
+  transform: translate(-50%, -50%);
+  animation: core-pulse 1.5s ease-in-out infinite;
+}
+
+/* Color variants */
+.spinner-primary {
+  color: #00ffff;
+}
+
+.spinner-white {
+  color: #ffffff;
+}
+
+.spinner-cyan {
+  color: #00ffff;
+}
+
+.spinner-purple {
+  color: #ff00ff;
+}
+
+/* Animations */
+@keyframes spin-fast {
+  from {
+    transform: rotate(0deg);
+  }
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+@keyframes segment-pulse {
+  0%, 100% {
+    opacity: 0.3;
+    transform: translateX(-50%) scale(0.8);
+  }
+  50% {
+    opacity: 1;
+    transform: translateX(-50%) scale(1.2);
+  }
+}
+
+@keyframes core-pulse {
+  0%, 100% {
+    opacity: 0.5;
+    transform: translate(-50%, -50%) scale(1);
+  }
+  50% {
+    opacity: 1;
+    transform: translate(-50%, -50%) scale(1.5);
+  }
+}
+
+/* Responsive adjustments */
+@media (max-width: 768px) {
+  .inline-spinner-md {
+    --spinner-size: 18px;
+  }
+}
+
+/* Accessibility */
+@media (prefers-reduced-motion: reduce) {
+  .spinner-ring,
+  .spinner-core {
+    animation-duration: 3s;
+  }
+  
+  .ring-segment {
+    animation-duration: 3s;
+  }
+}
+

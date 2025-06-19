@@ -19,7 +19,7 @@ const NavigationLoader = () => {
       clearTimeout(timer);
       stopLoading();
     };
-  }, [location.pathname, startLoading, stopLoading]);
+  }, [location.pathname]); // Remove startLoading and stopLoading from dependencies
 
   return null;
 };

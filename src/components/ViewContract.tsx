@@ -3,6 +3,7 @@ import React, { useState } from 'react';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
+import InlineSpinner from "./InlineSpinner";
 import { 
   FileText, 
   Download, 
@@ -116,7 +117,7 @@ const ViewContract = ({ contractId, onBack }: ViewContractProps) => {
         >
           {isDownloading ? (
             <div className="flex items-center">
-              <div className="w-4 h-4 border-2 border-white/30 border-t-white rounded-full animate-spin mr-2"></div>
+              <InlineSpinner size="sm" color="white" className="mr-2" />
               Downloading...
             </div>
           ) : (
