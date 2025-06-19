@@ -42,8 +42,8 @@ export default function Signup() {
       setMousePosition({ x: e.clientX, y: e.clientY });
     };
 
-    window.addEventListener('mousemove', handleMouseMove);
-    return () => window.removeEventListener('mousemove', handleMouseMove);
+    window.addEventListener("mousemove", handleMouseMove);
+    return () => window.removeEventListener("mousemove", handleMouseMove);
   }, []);
 
   const validateStep = (step: number) => {
@@ -52,12 +52,12 @@ export default function Signup() {
     if (step === 1) {
       errors.firstName = !formData.firstName.trim() ? "First name is required" : "";
       errors.lastName = !formData.lastName.trim() ? "Last name is required" : "";
-      errors.email = !formData.email.trim() ? "Email is required" : 
+      errors.email = !formData.email.trim() ? "Email is required" :
                    !/\S+@\S+\.\S+/.test(formData.email) ? "Email is invalid" : "";
     } else if (step === 2) {
-      errors.password = !formData.password ? "Password is required" : 
+      errors.password = !formData.password ? "Password is required" :
                        formData.password.length < 6 ? "Password must be at least 6 characters" : "";
-      errors.confirmPassword = !formData.confirmPassword ? "Please confirm your password" : 
+      errors.confirmPassword = !formData.confirmPassword ? "Please confirm your password" :
                               formData.password !== formData.confirmPassword ? "Passwords do not match" : "";
     }
 
@@ -92,7 +92,7 @@ export default function Signup() {
     setFormErrors(prev => ({ ...prev, general: "" }));
 
     try {
-      const response = await fetch('http://localhost:5002/api/auth/register', {
+      const response = await fetch("http://localhost:5002/api/auth/register", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
@@ -101,8 +101,8 @@ export default function Signup() {
       });
 
       if (response.ok) {
-        navigate('/login', { 
-          state: { message: 'Account created successfully! Please sign in.' }
+        navigate("/login", { 
+          state: { message: "Account created successfully! Please sign in." }
         });
       } else {
         const errorData = await response.json();
@@ -177,7 +177,7 @@ export default function Signup() {
       {/* Back Button */}
       <div className="absolute top-6 left-6 z-10">
         <Button
-          onClick={() => navigate('/')}
+          onClick={() => navigate("/")}
           variant="ghost"
           className="text-white hover:bg-white/10 border border-white/20 backdrop-blur-lg"
         >
@@ -211,14 +211,14 @@ export default function Signup() {
                 <div key={step.number} className="flex items-center">
                   <div className={`flex items-center justify-center w-10 h-10 rounded-full border-2 transition-all duration-300 ${
                     currentStep >= step.number 
-                      ? 'bg-gradient-to-r from-cyan-500 to-purple-600 border-transparent text-white' 
-                      : 'border-gray-600 text-gray-400'
+                      ? "bg-gradient-to-r from-cyan-500 to-purple-600 border-transparent text-white" 
+                      : "border-gray-600 text-gray-400"
                   }`}>
                     <step.icon className="h-5 w-5" />
                   </div>
                   {index < steps.length - 1 && (
                     <div className={`w-8 h-0.5 mx-2 transition-all duration-300 ${
-                      currentStep > step.number ? 'bg-gradient-to-r from-cyan-500 to-purple-600' : 'bg-gray-600'
+                      currentStep > step.number ? "bg-gradient-to-r from-cyan-500 to-purple-600" : "bg-gray-600"
                     }`} />
                   )}
                 </div>
@@ -398,7 +398,7 @@ export default function Signup() {
                           placeholder="Confirm your password"
                           value={formData.confirmPassword}
                           onChange={handleInputChange}
-                          className="bg-white/5 border-white/20 text-white placeholder:text-gray-500 focus:border-cyan-400 focus:ring-cyan-400/20 pr-10"
+                          className="bg-white/5 border-white/20 text-white placeholder:text-gray-500 focus:border-purple-400 focus:ring-purple-400/20 pr-10"
                         />
                         <Button
                           type="button"
@@ -417,12 +417,12 @@ export default function Signup() {
                       {formErrors.confirmPassword && <p className="text-red-400 text-xs">{formErrors.confirmPassword}</p>}
                     </div>
 
-                    <div className="flex gap-3">
+                    <div className="flex justify-between mt-6">
                       <Button
                         type="button"
                         onClick={handleBack}
                         variant="outline"
-                        className="flex-1 border-white/20 text-white hover:bg-white/10"
+                        className="bg-white/10 border-white/20 text-white hover:bg-white/20 transition-all duration-300"
                       >
                         <ArrowLeft className="mr-2 h-4 w-4" />
                         Back
@@ -430,7 +430,7 @@ export default function Signup() {
                       <Button
                         type="submit"
                         disabled={isLoading}
-                        className="flex-1 bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-semibold py-3 transition-all duration-300 transform hover:scale-105 disabled:opacity-50 disabled:cursor-not-allowed disabled:transform-none"
+                        className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-semibold py-3 transition-all duration-300 transform hover:scale-105 relative overflow-hidden group"
                       >
                         {isLoading ? (
                           <div className="flex items-center justify-center">
@@ -438,51 +438,52 @@ export default function Signup() {
                             Creating Account...
                           </div>
                         ) : (
-                          <div className="flex items-center">
-                            <Sparkles className="mr-2 h-4 w-4" />
+                          <span className="flex items-center justify-center">
                             Create Account
-                          </div>
+                            <ArrowLeft className="ml-2 h-4 w-4 rotate-180 group-hover:translate-x-1 transition-transform duration-300" />
+                          </span>
                         )}
+                        <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-cyan-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
                       </Button>
                     </div>
                   </div>
                 )}
-              </form>
 
-              {/* Sign In Link */}
-              <div className="text-center pt-4 border-t border-white/10">
-                <p className="text-slate-400 text-sm">
-                  Already have an account?{' '}
-                  <button
-                    type="button"
-                    onClick={() => navigate('/login')}
-                    className="text-cyan-400 hover:text-cyan-300 font-medium transition-colors duration-200"
-                  >
-                    Sign in
-                  </button>
-                </p>
-              </div>
+                {/* Step 3: Account Created */}
+                {currentStep === 3 && (
+                  <div className="text-center space-y-6 animate-fade-in">
+                    <CheckCircle className="h-20 w-20 text-green-500 mx-auto animate-bounce" />
+                    <h2 className="text-2xl font-bold text-white">Account Created Successfully!</h2>
+                    <p className="text-gray-300">You can now log in to your new account.</p>
+                    <Button
+                      onClick={() => navigate("/login")}
+                      className="w-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white font-semibold py-3 transition-all duration-300 transform hover:scale-105"
+                    >
+                      Go to Login
+                      <ArrowLeft className="ml-2 h-4 w-4 rotate-180" />
+                    </Button>
+                  </div>
+                )}
+              </form>
             </CardContent>
           </Card>
 
-          {/* Footer */}
-          <div className="text-center mt-8">
-            <p className="text-gray-500 text-sm">
-              Trusted by developers worldwide
-            </p>
-            <div className="flex justify-center items-center mt-2 space-x-4 text-xs text-gray-600">
-              <span className="flex items-center">
-                <CheckCircle className="h-3 w-3 mr-1 text-green-400" />
-                SSL Secured
-              </span>
-              <span className="flex items-center">
-                <Zap className="h-3 w-3 mr-1 text-yellow-400" />
-                Fast Login
-              </span>
-              <span className="flex items-center">
-                <Sparkles className="h-3 w-3 mr-1 text-purple-400" />
-                5-Star Rated
-              </span>
+          {/* Trust Indicators */}
+          <div className="mt-8 text-center animate-fade-in delay-500">
+            <p className="text-gray-500 text-xs mb-4">Trusted by developers worldwide</p>
+            <div className="flex justify-center items-center space-x-6 opacity-50">
+              <div className="flex items-center space-x-1">
+                <Sparkles className="h-4 w-4 text-yellow-400" />
+                <span className="text-xs text-gray-400">Cutting-Edge Security</span>
+              </div>
+              <div className="flex items-center space-x-1">
+                <img src="/logo.png" alt="Alphazee09 Logo" className="h-4 w-4 mr-1" />
+                <span className="text-xs text-gray-400">Seamless Experience</span>
+              </div>
+              <div className="flex items-center space-x-1">
+                <CheckCircle className="h-4 w-4 text-green-400" />
+                <span className="text-xs text-gray-400">Verified Accounts</span>
+              </div>
             </div>
           </div>
         </div>
@@ -490,4 +491,5 @@ export default function Signup() {
     </div>
   );
 }
+
 
