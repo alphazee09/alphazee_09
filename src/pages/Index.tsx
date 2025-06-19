@@ -1,3 +1,4 @@
+
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -13,28 +14,24 @@ import {
   Users, 
   Trophy, 
   Zap,
-  Play,
   Download,
   ExternalLink,
-  Github,
-  Linkedin,
   Mail,
   Calendar,
   Award,
   BookOpen,
-  Coffee,
   Heart,
   MessageCircle,
   Clock,
   CheckCircle,
   TrendingUp,
   Globe,
-  Sparkles
+  Sparkles,
+  Flag
 } from 'lucide-react';
 
 const Index = () => {
   const navigate = useNavigate();
-  const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isLoaded, setIsLoaded] = useState(false);
 
@@ -47,13 +44,6 @@ const Index = () => {
 
     window.addEventListener('mousemove', handleMouseMove);
     return () => window.removeEventListener('mousemove', handleMouseMove);
-  }, []);
-
-  useEffect(() => {
-    const interval = setInterval(() => {
-      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
-    }, 5000);
-    return () => clearInterval(interval);
   }, []);
 
   const services = [
@@ -87,30 +77,6 @@ const Index = () => {
     }
   ];
 
-  const testimonials = [
-    {
-      name: "Sarah Johnson",
-      role: "CEO, TechStart",
-      content: "DevMaster transformed our vision into reality. The attention to detail and technical expertise is unmatched.",
-      rating: 5,
-      image: "/placeholder.svg"
-    },
-    {
-      name: "Ahmed Al-Rashid", 
-      role: "CTO, InnovateOman",
-      content: "Working with DevMaster was a game-changer. They delivered beyond our expectations and on time.",
-      rating: 5,
-      image: "/placeholder.svg"
-    },
-    {
-      name: "Lisa Chen",
-      role: "Product Manager, GlobalTech",
-      content: "The quality of work and communication throughout the project was exceptional. Highly recommended!",
-      rating: 5,
-      image: "/placeholder.svg"
-    }
-  ];
-
   const projects = [
     {
       title: "E-Commerce Platform",
@@ -136,9 +102,9 @@ const Index = () => {
   ];
 
   const aboutStats = [
-    { icon: Trophy, label: "Projects Completed", value: "150+", color: "text-yellow-400" },
-    { icon: Users, label: "Happy Clients", value: "80+", color: "text-green-400" },
-    { icon: Award, label: "Years Experience", value: "8+", color: "text-blue-400" },
+    { icon: Trophy, label: "Projects Completed", value: "200+", color: "text-yellow-400" },
+    { icon: Users, label: "Happy Clients", value: "120+", color: "text-green-400" },
+    { icon: Award, label: "Years Experience", value: "13+", color: "text-blue-400" },
     { icon: Star, label: "Client Rating", value: "4.9/5", color: "text-purple-400" }
   ];
 
@@ -153,10 +119,11 @@ const Index = () => {
 
   const timeline = [
     {
-      year: "2024",
-      title: "AI Integration Specialist",
-      description: "Leading AI-powered development solutions for enterprise clients",
-      icon: Sparkles
+      year: "2025",
+      title: "AI Integration & Innovation",
+      description: "Leading cutting-edge AI-powered development solutions for global clients",
+      icon: Sparkles,
+      isActive: true
     },
     {
       year: "2022",
@@ -166,14 +133,14 @@ const Index = () => {
     },
     {
       year: "2020",
-      title: "Founded DevMaster",
+      title: "Founded Alphazee09",
       description: "Started freelance development with focus on quality and innovation",
       icon: Zap
     },
     {
-      year: "2016",
+      year: "2012",
       title: "Software Engineer",
-      description: "Began career at tech startup, specializing in web development",
+      description: "Began career in tech industry, specializing in web development",
       icon: Code
     }
   ];
@@ -182,20 +149,20 @@ const Index = () => {
     {
       icon: Mail,
       label: "Email",
-      value: "hello@devmaster.com",
-      action: () => window.open('mailto:hello@devmaster.com')
+      value: "hi@mazinyahia.com",
+      action: () => window.open('mailto:hi@mazinyahia.com')
     },
     {
       icon: MessageCircle,
       label: "WhatsApp",
-      value: "+968 9123 4567",
-      action: () => window.open('https://wa.me/96891234567')
+      value: "+968 78008637",
+      action: () => window.open('https://wa.me/96878008637')
     },
     {
       icon: Calendar,
       label: "Schedule Call",
       value: "Book a meeting",
-      action: () => window.open('https://calendly.com/devmaster')
+      action: () => window.open('https://calendly.com/alphazee09')
     }
   ];
 
@@ -241,7 +208,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent flex items-center">
             <Zap className="mr-2 h-6 w-6 text-cyan-400" />
-            DevMaster
+            Alphazee09
           </div>
           <div className="hidden md:flex space-x-8">
             <a href="#services" className="hover:text-cyan-400 transition-colors cursor-pointer">Services</a>
@@ -268,19 +235,17 @@ const Index = () => {
             <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
               <Button 
                 size="lg" 
-                className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 text-lg px-8 py-6 text-white border-none"
+                className="relative bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 text-lg px-8 py-6 text-white border-none overflow-hidden group"
                 onClick={() => navigate('/submit-project')}
               >
-                Start Your Project
-                <ArrowRight className="ml-2 h-5 w-5" />
-              </Button>
-              <Button 
-                variant="outline" 
-                size="lg" 
-                className="border-white/30 text-white hover:bg-white/10 text-lg px-8 py-6 bg-transparent"
-              >
-                <Play className="mr-2 h-5 w-5" />
-                Watch Demo
+                <div className="absolute inset-0 border-2 border-transparent bg-gradient-to-r from-cyan-400 to-purple-500 rounded-lg">
+                  <div className="absolute inset-0 border-2 border-white/30 rounded-lg animate-pulse"></div>
+                  <div className="absolute inset-0 border-t-2 border-cyan-400 rounded-lg animate-spin" style={{ animationDuration: '3s' }}></div>
+                </div>
+                <span className="relative z-10 flex items-center">
+                  Start Your Dream Project Now
+                  <ArrowRight className="ml-2 h-5 w-5" />
+                </span>
               </Button>
             </div>
           </div>
@@ -329,7 +294,7 @@ const Index = () => {
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
             <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-              About DevMaster
+              About Alphazee09
             </h2>
             <p className="text-xl text-gray-400 max-w-3xl mx-auto">
               Passionate developer with a mission to create exceptional digital experiences
@@ -342,35 +307,22 @@ const Index = () => {
               <div className="relative">
                 <img 
                   src="/placeholder.svg" 
-                  alt="DevMaster Profile" 
+                  alt="Mazin Yahia Profile" 
                   className="w-64 h-64 rounded-full mx-auto lg:mx-0 object-cover border-4 border-gradient-to-r from-cyan-500 to-purple-600"
                 />
-                <div className="absolute -bottom-4 -right-4 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full p-3">
-                  <Coffee className="h-8 w-8 text-white" />
+                <div className="absolute -bottom-4 -right-4 bg-gradient-to-r from-red-500 via-white to-black rounded-full p-3">
+                  <Flag className="h-8 w-8 text-red-500" />
                 </div>
               </div>
               
               <div className="text-center lg:text-left">
-                <h3 className="text-2xl font-bold mb-2">Ahmed Al-Mashrafi</h3>
+                <h3 className="text-2xl font-bold mb-2">Mazin Yahia MohamedElhassan</h3>
                 <p className="text-cyan-400 mb-4">Senior Full-Stack Developer & UI/UX Designer</p>
                 <p className="text-gray-300 leading-relaxed mb-6">
-                  With over 8 years of experience in the tech industry, I specialize in creating innovative 
+                  With over 13 years of experience in the tech industry, I specialize in creating innovative 
                   digital solutions that drive business growth. My passion lies in combining cutting-edge 
                   technology with beautiful design to deliver exceptional user experiences.
                 </p>
-                
-                {/* Social Links */}
-                <div className="flex justify-center lg:justify-start space-x-4">
-                  <Button variant="outline" size="sm" className="border-white/30 text-white hover:bg-white/10 bg-transparent">
-                    <Github className="h-4 w-4" />
-                  </Button>
-                  <Button variant="outline" size="sm" className="border-white/30 text-white hover:bg-white/10 bg-transparent">
-                    <Linkedin className="h-4 w-4" />
-                  </Button>
-                  <Button variant="outline" size="sm" className="border-white/30 text-white hover:bg-white/10 bg-transparent">
-                    <Mail className="h-4 w-4" />
-                  </Button>
-                </div>
               </div>
             </div>
 
@@ -416,13 +368,20 @@ const Index = () => {
               {timeline.map((item, index) => (
                 <div key={index} className={`flex items-center mb-8 ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
                   <div className={`w-1/2 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8 text-left'}`}>
-                    <Card className="bg-black/20 backdrop-blur-lg border border-white/10 p-4">
-                      <div className="text-cyan-400 font-bold text-lg">{item.year}</div>
-                      <h4 className="text-white font-semibold mb-2">{item.title}</h4>
-                      <p className="text-gray-400 text-sm">{item.description}</p>
+                    <Card className={`bg-black/20 backdrop-blur-lg border border-white/10 p-4 relative overflow-hidden ${item.isActive ? 'border-cyan-400' : ''}`}>
+                      {item.isActive && (
+                        <div className="absolute inset-0 border-2 border-cyan-400 rounded-lg">
+                          <div className="absolute inset-0 border-t-2 border-purple-400 rounded-lg animate-spin" style={{ animationDuration: '3s' }}></div>
+                        </div>
+                      )}
+                      <div className="relative z-10">
+                        <div className={`font-bold text-lg ${item.isActive ? 'text-cyan-400' : 'text-cyan-400'}`}>{item.year}</div>
+                        <h4 className="text-white font-semibold mb-2">{item.title}</h4>
+                        <p className="text-gray-400 text-sm">{item.description}</p>
+                      </div>
                     </Card>
                   </div>
-                  <div className="w-12 h-12 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full flex items-center justify-center relative z-10">
+                  <div className={`w-12 h-12 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full flex items-center justify-center relative z-10 ${item.isActive ? 'animate-pulse' : ''}`}>
                     <item.icon className="h-6 w-6 text-white" />
                   </div>
                   <div className="w-1/2"></div>
@@ -497,52 +456,6 @@ const Index = () => {
         </div>
       </section>
 
-      {/* Testimonials Section */}
-      <section className="relative z-10 px-6 py-20 bg-black/10">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl md:text-5xl font-bold mb-16 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-            Client Testimonials
-          </h2>
-
-          <Card className="bg-black/20 backdrop-blur-lg border border-white/10 p-8 md:p-12 relative overflow-hidden">
-            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 to-purple-500/5"></div>
-            <div className="relative z-10">
-              <div className="flex justify-center mb-6">
-                {[...Array(testimonials[currentTestimonial].rating)].map((_, i) => (
-                  <Star key={i} className="h-6 w-6 text-yellow-400 fill-current" />
-                ))}
-              </div>
-              <blockquote className="text-xl md:text-2xl text-gray-300 mb-8 font-light italic">
-                "{testimonials[currentTestimonial].content}"
-              </blockquote>
-              <div className="flex items-center justify-center space-x-4">
-                <img 
-                  src={testimonials[currentTestimonial].image} 
-                  alt={testimonials[currentTestimonial].name}
-                  className="w-12 h-12 rounded-full object-cover"
-                />
-                <div className="text-left">
-                  <div className="font-semibold text-white">{testimonials[currentTestimonial].name}</div>
-                  <div className="text-gray-400 text-sm">{testimonials[currentTestimonial].role}</div>
-                </div>
-              </div>
-            </div>
-          </Card>
-
-          <div className="flex justify-center space-x-2 mt-8">
-            {testimonials.map((_, index) => (
-              <button
-                key={index}
-                className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                  index === currentTestimonial ? 'bg-cyan-400' : 'bg-white/30'
-                }`}
-                onClick={() => setCurrentTestimonial(index)}
-              />
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Contact Section */}
       <section id="contact" className="relative z-10 px-6 py-20">
         <div className="max-w-4xl mx-auto text-center">
@@ -556,17 +469,22 @@ const Index = () => {
           <div className="flex flex-col md:flex-row gap-6 justify-center">
             <Button 
               size="lg" 
-              className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 text-lg px-8 py-6 text-white border-none"
+              className="relative bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 text-lg px-8 py-6 text-white border-none overflow-hidden"
               onClick={() => navigate('/submit-project')}
             >
-              Submit Your Project
-              <ArrowRight className="ml-2 h-5 w-5" />
+              <div className="absolute inset-0 border-2 border-transparent bg-gradient-to-r from-cyan-400 to-purple-500 rounded-lg">
+                <div className="absolute inset-0 border-t-2 border-cyan-400 rounded-lg animate-spin" style={{ animationDuration: '3s' }}></div>
+              </div>
+              <span className="relative z-10 flex items-center">
+                Submit Your Project
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </span>
             </Button>
             <Button 
               variant="outline" 
               size="lg" 
               className="border-white/30 text-white hover:bg-white/10 text-lg px-8 py-6 bg-transparent"
-              onClick={() => window.open('mailto:hello@devmaster.com')}
+              onClick={() => window.open('mailto:hi@mazinyahia.com')}
             >
               <Mail className="mr-2 h-5 w-5" />
               Send Email
@@ -583,7 +501,7 @@ const Index = () => {
               <div className="flex items-center mb-4">
                 <Zap className="h-6 w-6 text-cyan-400 mr-2" />
                 <span className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-                  DevMaster
+                  Alphazee09
                 </span>
               </div>
               <p className="text-gray-400 max-w-md">
@@ -611,7 +529,7 @@ const Index = () => {
           </div>
           
           <div className="border-t border-white/10 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2024 DevMaster. All rights reserved. Made with <Heart className="inline h-4 w-4 text-red-400" /> in Oman</p>
+            <p>&copy; 2025 Alphazee09. All rights reserved. Made with <Heart className="inline h-4 w-4 text-red-400" /> in Sudan</p>
           </div>
         </div>
       </footer>

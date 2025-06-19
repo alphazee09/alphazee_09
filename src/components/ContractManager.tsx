@@ -5,6 +5,7 @@ import { Card } from "@/components/ui/card";
 import { Badge } from "@/components/ui/badge";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
+import ViewContract from './ViewContract';
 import { 
   FileText, 
   Download, 
@@ -24,6 +25,7 @@ const ContractManager = () => {
   const [backIdImage, setBackIdImage] = useState<string | null>(null);
   const [signaturePad, setSignaturePad] = useState<string>('');
   const [isSignatureVerified, setIsSignatureVerified] = useState(false);
+  const [viewingContract, setViewingContract] = useState<string | null>(null);
 
   const contracts = [
     {
@@ -94,10 +96,13 @@ const ContractManager = () => {
   const handleSignatureVerification = () => {
     if (frontIdImage && backIdImage && signaturePad) {
       setIsSignatureVerified(true);
-      // Here you would typically send the data to your backend
       console.log('E-Signature verification completed');
     }
   };
+
+  if (viewingContract) {
+    return <ViewContract contractId={viewingContract} onBack={() => setViewingContract(null)} />;
+  }
 
   return (
     <div className="space-y-6 md:space-y-8 animate-fade-in">
@@ -155,7 +160,7 @@ const ContractManager = () => {
                         id="front-id"
                       />
                       <Label htmlFor="front-id" className="cursor-pointer">
-                        <Button variant="outline" className="border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10 bg-transparent">
+                        <Button variant="outline" className="border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10 bg-gray-800">
                           Choose File
                         </Button>
                       </Label>
@@ -185,7 +190,7 @@ const ContractManager = () => {
                         id="back-id"
                       />
                       <Label htmlFor="back-id" className="cursor-pointer">
-                        <Button variant="outline" className="border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10 bg-transparent">
+                        <Button variant="outline" className="border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10 bg-gray-800">
                           Choose File
                         </Button>
                       </Label>
@@ -210,7 +215,6 @@ const ContractManager = () => {
                     onMouseDown={(e) => {
                       const canvas = e.currentTarget;
                       const rect = canvas.getBoundingClientRect();
-                      // Basic signature drawing logic would go here
                       setSignaturePad('signature-data');
                     }}
                   />
@@ -219,7 +223,7 @@ const ContractManager = () => {
                       variant="outline"
                       size="sm"
                       onClick={() => setSignaturePad('')}
-                      className="border-gray-300 text-gray-600 hover:bg-gray-100"
+                      className="border-gray-300 text-gray-600 hover:bg-gray-100 bg-gray-100"
                     >
                       Clear
                     </Button>
@@ -249,7 +253,7 @@ const ContractManager = () => {
             <Button
               variant="outline"
               onClick={() => setIsSignatureVerified(false)}
-              className="border-white/30 text-white hover:bg-white/10 bg-transparent"
+              className="border-white/30 text-white hover:bg-white/10 bg-gray-800"
             >
               Update Signature
             </Button>
@@ -290,7 +294,8 @@ const ContractManager = () => {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10 bg-transparent"
+                      onClick={() => setViewingContract(contract.id.toString())}
+                      className="border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10 bg-gray-800"
                     >
                       <Eye className="mr-2 h-4 w-4" />
                       View
@@ -298,7 +303,7 @@ const ContractManager = () => {
                     <Button
                       variant="outline"
                       size="sm"
-                      className="border-green-400/50 text-green-400 hover:bg-green-400/10 bg-transparent"
+                      className="border-green-400/50 text-green-400 hover:bg-green-400/10 bg-gray-800"
                     >
                       <Download className="mr-2 h-4 w-4" />
                       Download PDF
