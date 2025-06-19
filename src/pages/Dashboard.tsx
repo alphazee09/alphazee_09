@@ -198,8 +198,8 @@ const Dashboard = () => {
   ];
 
   const renderSidebarContent = () => (
-    <>
-      <div className="p-4 md:p-6">
+    <div className="flex flex-col h-full">
+      <div className="p-4 md:p-6 flex-1">
         <div className="text-xl md:text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-6 md:mb-8 flex items-center">
           <Zap className="mr-2 h-5 w-5 md:h-6 md:w-6 text-cyan-400" />
           <span className="hidden md:inline">Client Portal</span>
@@ -212,8 +212,8 @@ const Dashboard = () => {
               variant={activeTab === item.key ? 'default' : 'ghost'}
               className={`w-full justify-start relative overflow-hidden group transition-all duration-300 ${
                 activeTab === item.key 
-                  ? 'bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border border-cyan-400/50' 
-                  : 'hover:bg-white/5'
+                  ? 'bg-gradient-to-r from-cyan-500/20 to-purple-500/20 border border-cyan-400/50 text-white' 
+                  : 'hover:bg-white/5 text-gray-300 hover:text-white bg-transparent border-transparent'
               }`}
               onClick={() => {
                 setActiveTab(item.key);
@@ -231,27 +231,28 @@ const Dashboard = () => {
         </nav>
       </div>
 
-      <div className="absolute bottom-4 md:bottom-6 left-4 md:left-6 right-4 md:right-6">
+      {/* Fixed User Profile Section */}
+      <div className="p-4 md:p-6 border-t border-white/10 mt-auto">
         <div className="flex items-center space-x-3 mb-4 p-3 rounded-lg bg-white/5 backdrop-blur-sm">
-          <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center relative">
-            <User className="h-4 w-4 md:h-5 md:w-5" />
+          <div className="w-8 h-8 md:w-10 md:h-10 bg-gradient-to-r from-blue-500 to-purple-600 rounded-full flex items-center justify-center relative flex-shrink-0">
+            <User className="h-4 w-4 md:h-5 md:w-5 text-white" />
             <div className="absolute -top-1 -right-1 w-3 h-3 bg-green-400 rounded-full border-2 border-black"></div>
           </div>
-          <div className="hidden md:block">
-            <div className="text-sm font-medium">John Doe</div>
+          <div className="hidden md:block min-w-0 flex-1">
+            <div className="text-sm font-medium text-white truncate">John Doe</div>
             <div className="text-xs text-gray-400">Premium Client</div>
           </div>
         </div>
         <Button 
           variant="ghost" 
-          className="w-full justify-start text-gray-400 hover:text-white hover:bg-red-500/20"
+          className="w-full justify-start text-gray-400 hover:text-white hover:bg-red-500/20 bg-transparent border-transparent"
           onClick={() => navigate('/')}
         >
           <LogOut className="mr-2 md:mr-3 h-4 w-4" />
           <span className="hidden md:inline">Sign Out</span>
         </Button>
       </div>
-    </>
+    </div>
   );
 
   return (
@@ -291,18 +292,18 @@ const Dashboard = () => {
         ))}
       </div>
 
-      <div className="relative z-10 flex">
+      <div className="relative z-10 flex min-h-screen">
         {/* Mobile Header */}
         <div className="md:hidden fixed top-0 left-0 right-0 z-50 bg-black/20 backdrop-blur-lg border-b border-white/10 p-4">
           <div className="flex items-center justify-between">
             <div className="text-xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-              DevMaster
+              Client Portal
             </div>
             <Button
               variant="ghost"
               size="sm"
               onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
-              className="text-white"
+              className="text-white bg-transparent border-transparent hover:bg-white/10"
             >
               {isMobileMenuOpen ? <X className="h-6 w-6" /> : <Menu className="h-6 w-6" />}
             </Button>
@@ -313,7 +314,7 @@ const Dashboard = () => {
         {isMobileMenuOpen && (
           <div className="md:hidden fixed inset-0 z-40 bg-black/50 backdrop-blur-sm" onClick={() => setIsMobileMenuOpen(false)}>
             <div className="fixed top-0 left-0 h-full w-72 bg-black/20 backdrop-blur-xl border-r border-white/10" onClick={(e) => e.stopPropagation()}>
-              <div className="pt-20">
+              <div className="pt-20 h-full">
                 {renderSidebarContent()}
               </div>
             </div>
@@ -321,9 +322,9 @@ const Dashboard = () => {
         )}
 
         {/* Desktop Sidebar */}
-        <div className="hidden md:block w-72 bg-black/20 backdrop-blur-xl border-r border-white/10 min-h-screen relative">
+        <div className="hidden md:flex w-72 bg-black/20 backdrop-blur-xl border-r border-white/10 min-h-screen relative flex-col">
           <div className="absolute inset-0 bg-gradient-to-b from-cyan-500/5 to-purple-500/5"></div>
-          <div className="relative">
+          <div className="relative flex-1 flex flex-col">
             {renderSidebarContent()}
           </div>
         </div>
@@ -337,7 +338,7 @@ const Dashboard = () => {
                 <Button
                   variant="outline"
                   onClick={() => setSelectedProject(null)}
-                  className="border-white/30 text-white hover:bg-white/10 mb-4"
+                  className="border-white/30 text-white hover:bg-white/10 mb-4 bg-transparent"
                 >
                   ← Back to Projects
                 </Button>
@@ -355,7 +356,7 @@ const Dashboard = () => {
                         <p className="text-gray-300">Here's what's happening with your projects</p>
                       </div>
                       <Button 
-                        className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 relative overflow-hidden group"
+                        className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 relative overflow-hidden group text-white border-none"
                         onClick={() => navigate('/submit-project')}
                       >
                         <span className="relative z-10 flex items-center">
@@ -453,12 +454,12 @@ const Dashboard = () => {
                           />
                         </div>
                         <div className="flex space-x-2">
-                          <Button variant="outline" className="border-white/30 text-white hover:bg-white/10">
+                          <Button variant="outline" className="border-white/30 text-white hover:bg-white/10 bg-transparent">
                             <Filter className="mr-2 h-4 w-4" />
                             Filter
                           </Button>
                           <Button 
-                            className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700"
+                            className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white border-none"
                             onClick={() => navigate('/submit-project')}
                           >
                             <Plus className="mr-2 h-4 w-4" />
@@ -525,21 +526,21 @@ const Dashboard = () => {
                                 <Button 
                                   variant="outline" 
                                   size="sm" 
-                                  className="border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10 flex-1 md:flex-none"
+                                  className="border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10 flex-1 md:flex-none bg-transparent"
                                   onClick={() => setSelectedProject(project)}
                                 >
                                   <Eye className="mr-2 h-4 w-4" />
                                   View Details
                                 </Button>
-                                <Button variant="outline" size="sm" className="border-purple-400/50 text-purple-400 hover:bg-purple-400/10 flex-1 md:flex-none">
+                                <Button variant="outline" size="sm" className="border-purple-400/50 text-purple-400 hover:bg-purple-400/10 flex-1 md:flex-none bg-transparent">
                                   <MessageSquare className="mr-2 h-4 w-4" />
                                   Messages ({project.messages})
                                 </Button>
-                                <Button variant="outline" size="sm" className="border-green-400/50 text-green-400 hover:bg-green-400/10 flex-1 md:flex-none">
+                                <Button variant="outline" size="sm" className="border-green-400/50 text-green-400 hover:bg-green-400/10 flex-1 md:flex-none bg-transparent">
                                   <Upload className="mr-2 h-4 w-4" />
                                   Files ({project.files})
                                 </Button>
-                                <Button variant="outline" size="sm" className="border-yellow-400/50 text-yellow-400 hover:bg-yellow-400/10 flex-1 md:flex-none">
+                                <Button variant="outline" size="sm" className="border-yellow-400/50 text-yellow-400 hover:bg-yellow-400/10 flex-1 md:flex-none bg-transparent">
                                   <FileText className="mr-2 h-4 w-4" />
                                   Contract
                                 </Button>
@@ -588,10 +589,10 @@ const Dashboard = () => {
                         <div className="flex items-center justify-between mb-6">
                           <h3 className="text-lg font-bold truncate">E-Commerce Platform</h3>
                           <div className="flex space-x-2">
-                            <Button variant="outline" size="sm" className="border-white/30 text-white hover:bg-white/10">
+                            <Button variant="outline" size="sm" className="border-white/30 text-white hover:bg-white/10 bg-transparent">
                               <Video className="h-4 w-4" />
                             </Button>
-                            <Button variant="outline" size="sm" className="border-white/30 text-white hover:bg-white/10">
+                            <Button variant="outline" size="sm" className="border-white/30 text-white hover:bg-white/10 bg-transparent">
                               <Phone className="h-4 w-4" />
                             </Button>
                           </div>
@@ -617,7 +618,7 @@ const Dashboard = () => {
                             placeholder="Type your message..." 
                             className="flex-1 bg-white/5 border-white/20 text-white"
                           />
-                          <Button variant="outline" size="sm" className="border-white/30 text-white hover:bg-white/10">
+                          <Button variant="outline" size="sm" className="border-white/30 text-white hover:bg-white/10 bg-transparent">
                             <Paperclip className="h-4 w-4" />
                           </Button>
                           <Button className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700">

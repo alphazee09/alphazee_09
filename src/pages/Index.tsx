@@ -1,5 +1,4 @@
-
-import { useState, useEffect } from 'react';
+import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
@@ -8,37 +7,36 @@ import {
   ArrowRight, 
   Code, 
   Smartphone, 
-  Globe, 
+  Palette, 
   Database, 
-  Star,
+  Star, 
+  Users, 
+  Trophy, 
+  Zap,
+  Play,
+  Download,
   ExternalLink,
-  Calendar,
-  MapPin,
-  Mail,
-  Phone,
   Github,
   Linkedin,
-  Twitter,
-  Zap,
-  Rocket,
-  Brain,
-  Target,
+  Mail,
+  Calendar,
   Award,
-  Users,
-  TrendingUp,
-  Shield,
+  BookOpen,
+  Coffee,
+  Heart,
+  MessageCircle,
   Clock,
   CheckCircle,
-  Briefcase,
-  GraduationCap,
-  Coffee
+  TrendingUp,
+  Globe,
+  Sparkles
 } from 'lucide-react';
 
 const Index = () => {
   const navigate = useNavigate();
+  const [currentTestimonial, setCurrentTestimonial] = useState(0);
   const [mousePosition, setMousePosition] = useState({ x: 0, y: 0 });
   const [isLoaded, setIsLoaded] = useState(false);
-  const [activeProject, setActiveProject] = useState(0);
 
   useEffect(() => {
     setIsLoaded(true);
@@ -51,85 +49,161 @@ const Index = () => {
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  const skills = [
-    { name: 'React/Next.js', level: 95, icon: Code },
-    { name: 'Node.js/Express', level: 90, icon: Database },
-    { name: 'TypeScript', level: 88, icon: Code },
-    { name: 'Python/Django', level: 85, icon: Code },
-    { name: 'Mobile Development', level: 82, icon: Smartphone },
-    { name: 'Cloud/DevOps', level: 80, icon: Globe }
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentTestimonial((prev) => (prev + 1) % testimonials.length);
+    }, 5000);
+    return () => clearInterval(interval);
+  }, []);
+
+  const services = [
+    {
+      icon: Code,
+      title: "Full-Stack Development",
+      description: "End-to-end web applications with modern technologies",
+      features: ["React/Next.js", "Node.js", "Database Design", "API Development"],
+      color: "from-blue-500 to-cyan-500"
+    },
+    {
+      icon: Smartphone,
+      title: "Mobile Development",
+      description: "Native and cross-platform mobile applications",
+      features: ["React Native", "Flutter", "iOS/Android", "App Store Deployment"],
+      color: "from-green-500 to-emerald-500"
+    },
+    {
+      icon: Palette,
+      title: "UI/UX Design",
+      description: "Beautiful, user-centered design experiences",
+      features: ["User Research", "Wireframing", "Prototyping", "Design Systems"],
+      color: "from-purple-500 to-pink-500"
+    },
+    {
+      icon: Database,
+      title: "Cloud & DevOps",
+      description: "Scalable infrastructure and deployment solutions",
+      features: ["AWS/Azure", "Docker", "CI/CD", "Monitoring"],
+      color: "from-orange-500 to-red-500"
+    }
   ];
 
-  const experience = [
+  const testimonials = [
     {
-      year: '2024',
-      title: 'Senior Full Stack Developer',
-      company: 'Tech Innovators LLC',
-      description: 'Leading development of enterprise applications using modern tech stack',
-      achievements: ['Led team of 5 developers', 'Increased performance by 40%', 'Implemented CI/CD pipelines']
+      name: "Sarah Johnson",
+      role: "CEO, TechStart",
+      content: "DevMaster transformed our vision into reality. The attention to detail and technical expertise is unmatched.",
+      rating: 5,
+      image: "/placeholder.svg"
     },
     {
-      year: '2022',
-      title: 'Full Stack Developer',
-      company: 'Digital Solutions Co',
-      description: 'Developed scalable web applications and mobile solutions',
-      achievements: ['Built 15+ production apps', 'Reduced load times by 60%', 'Mentored junior developers']
+      name: "Ahmed Al-Rashid", 
+      role: "CTO, InnovateOman",
+      content: "Working with DevMaster was a game-changer. They delivered beyond our expectations and on time.",
+      rating: 5,
+      image: "/placeholder.svg"
     },
     {
-      year: '2020',
-      title: 'Frontend Developer',
-      company: 'Creative Agency',
-      description: 'Specialized in creating stunning user interfaces and experiences',
-      achievements: ['Delivered 30+ projects', 'Improved user engagement by 75%', 'Won design excellence award']
+      name: "Lisa Chen",
+      role: "Product Manager, GlobalTech",
+      content: "The quality of work and communication throughout the project was exceptional. Highly recommended!",
+      rating: 5,
+      image: "/placeholder.svg"
     }
   ];
 
   const projects = [
     {
-      title: 'E-Commerce Platform',
-      description: 'Full-stack e-commerce solution with AI-powered recommendations',
-      tech: ['React', 'Node.js', 'MongoDB', 'Stripe'],
-      image: '/placeholder.svg',
-      liveUrl: '#',
-      githubUrl: '#',
-      featured: true
+      title: "E-Commerce Platform",
+      description: "Full-featured online store with payment integration",
+      image: "/placeholder.svg",
+      tags: ["React", "Node.js", "Stripe", "MongoDB"],
+      link: "#"
     },
     {
-      title: 'Real Estate CRM',
-      description: 'Comprehensive CRM system for real estate management',
-      tech: ['Next.js', 'PostgreSQL', 'Prisma', 'Tailwind'],
-      image: '/placeholder.svg',
-      liveUrl: '#',
-      githubUrl: '#',
-      featured: true
+      title: "Mobile Banking App",
+      description: "Secure banking application with biometric authentication",
+      image: "/placeholder.svg", 
+      tags: ["React Native", "Firebase", "Biometrics"],
+      link: "#"
     },
     {
-      title: 'Fitness Tracking App',
-      description: 'Mobile app for tracking workouts and nutrition',
-      tech: ['React Native', 'Firebase', 'Redux', 'Charts.js'],
-      image: '/placeholder.svg',
-      liveUrl: '#',
-      githubUrl: '#',
-      featured: true
-    },
-    {
-      title: 'Task Management System',
-      description: 'Enterprise task management with real-time collaboration',
-      tech: ['Vue.js', 'Express', 'Socket.io', 'MySQL'],
-      image: '/placeholder.svg',
-      liveUrl: '#',
-      githubUrl: '#',
-      featured: false
+      title: "AI Dashboard",
+      description: "Data visualization platform with machine learning insights",
+      image: "/placeholder.svg",
+      tags: ["Python", "TensorFlow", "D3.js", "PostgreSQL"],
+      link: "#"
     }
   ];
 
-  const featuredProjects = projects.filter(p => p.featured);
+  const aboutStats = [
+    { icon: Trophy, label: "Projects Completed", value: "150+", color: "text-yellow-400" },
+    { icon: Users, label: "Happy Clients", value: "80+", color: "text-green-400" },
+    { icon: Award, label: "Years Experience", value: "8+", color: "text-blue-400" },
+    { icon: Star, label: "Client Rating", value: "4.9/5", color: "text-purple-400" }
+  ];
+
+  const skills = [
+    { name: "React/Next.js", level: 95, color: "bg-blue-500" },
+    { name: "Node.js", level: 90, color: "bg-green-500" },
+    { name: "Python", level: 85, color: "bg-yellow-500" },
+    { name: "UI/UX Design", level: 88, color: "bg-purple-500" },
+    { name: "Mobile Development", level: 82, color: "bg-cyan-500" },
+    { name: "DevOps", level: 78, color: "bg-orange-500" }
+  ];
+
+  const timeline = [
+    {
+      year: "2024",
+      title: "AI Integration Specialist",
+      description: "Leading AI-powered development solutions for enterprise clients",
+      icon: Sparkles
+    },
+    {
+      year: "2022",
+      title: "Senior Full-Stack Developer",
+      description: "Expanded services to include mobile development and cloud solutions",
+      icon: Globe
+    },
+    {
+      year: "2020",
+      title: "Founded DevMaster",
+      description: "Started freelance development with focus on quality and innovation",
+      icon: Zap
+    },
+    {
+      year: "2016",
+      title: "Software Engineer",
+      description: "Began career at tech startup, specializing in web development",
+      icon: Code
+    }
+  ];
+
+  const contactMethods = [
+    {
+      icon: Mail,
+      label: "Email",
+      value: "hello@devmaster.com",
+      action: () => window.open('mailto:hello@devmaster.com')
+    },
+    {
+      icon: MessageCircle,
+      label: "WhatsApp",
+      value: "+968 9123 4567",
+      action: () => window.open('https://wa.me/96891234567')
+    },
+    {
+      icon: Calendar,
+      label: "Schedule Call",
+      value: "Book a meeting",
+      action: () => window.open('https://calendly.com/devmaster')
+    }
+  ];
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white relative overflow-hidden">
+    <div className="min-h-screen bg-gradient-to-br from-slate-900 via-purple-900 to-slate-900 text-white">
       {/* Animated Cursor */}
       <div 
-        className="fixed w-4 h-4 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-full pointer-events-none z-50 mix-blend-difference transition-all duration-150"
+        className="fixed w-4 h-4 bg-gradient-to-r from-cyan-400 to-purple-600 rounded-full pointer-events-none z-50 mix-blend-difference transition-all duration-150 hidden md:block"
         style={{
           left: mousePosition.x - 8,
           top: mousePosition.y - 8,
@@ -148,7 +222,7 @@ const Index = () => {
 
       {/* Floating Particles */}
       <div className="fixed inset-0 overflow-hidden pointer-events-none">
-        {[...Array(50)].map((_, i) => (
+        {[...Array(30)].map((_, i) => (
           <div
             key={i}
             className="absolute w-1 h-1 bg-cyan-400 rounded-full animate-pulse"
@@ -163,377 +237,381 @@ const Index = () => {
       </div>
 
       {/* Navigation */}
-      <nav className="fixed top-0 left-0 right-0 z-40 bg-black/20 backdrop-blur-lg border-b border-white/10">
-        <div className="container mx-auto px-4 md:px-6 py-4">
-          <div className="flex items-center justify-between">
-            <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-              DevMaster
-            </div>
-            <div className="hidden md:flex space-x-8">
-              <a href="#about" className="hover:text-cyan-400 transition-colors duration-300">About</a>
-              <a href="#experience" className="hover:text-cyan-400 transition-colors duration-300">Experience</a>
-              <a href="#projects" className="hover:text-cyan-400 transition-colors duration-300">Projects</a>
-              <a href="#contact" className="hover:text-cyan-400 transition-colors duration-300">Contact</a>
-            </div>
-            <div className="flex space-x-4">
-              <Button 
-                variant="outline" 
-                onClick={() => navigate('/login')}
-                className="border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10 transition-all duration-300"
-              >
-                Login
-              </Button>
-              <Button 
-                onClick={() => navigate('/submit-project')}
-                className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 relative overflow-hidden group"
-              >
-                <span className="relative z-10">Start Project</span>
-                <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-cyan-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-              </Button>
-            </div>
+      <nav className="relative z-10 p-6 bg-black/20 backdrop-blur-lg border-b border-white/10">
+        <div className="max-w-7xl mx-auto flex justify-between items-center">
+          <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent flex items-center">
+            <Zap className="mr-2 h-6 w-6 text-cyan-400" />
+            DevMaster
           </div>
+          <div className="hidden md:flex space-x-8">
+            <a href="#services" className="hover:text-cyan-400 transition-colors cursor-pointer">Services</a>
+            <a href="#about" className="hover:text-cyan-400 transition-colors cursor-pointer">About</a>
+            <a href="#portfolio" className="hover:text-cyan-400 transition-colors cursor-pointer">Portfolio</a>
+            <a href="#contact" className="hover:text-cyan-400 transition-colors cursor-pointer">Contact</a>
+          </div>
+          <Button onClick={() => navigate('/login')} className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 text-white border-none">
+            Client Login
+          </Button>
         </div>
       </nav>
 
       {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center px-4 md:px-6 pt-20">
-        <div className="text-center max-w-5xl mx-auto animate-fade-in">
-          <div className="mb-8">
-            <div className="w-32 h-32 mx-auto mb-6 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600 p-1 animate-scale-in">
-              <div className="w-full h-full rounded-full bg-slate-900 flex items-center justify-center">
-                <Code className="h-16 w-16 text-cyan-400" />
-              </div>
-            </div>
-            <h1 className="text-4xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent leading-tight">
-              Full Stack Developer
+      <section className="relative z-10 px-6 py-20 text-center">
+        <div className="max-w-6xl mx-auto">
+          <div className="animate-fade-in">
+            <h1 className="text-4xl md:text-7xl font-bold mb-6 bg-gradient-to-r from-cyan-400 via-purple-400 to-pink-400 bg-clip-text text-transparent">
+              Building Digital Excellence
             </h1>
-            <p className="text-xl md:text-2xl text-gray-300 mb-8 leading-relaxed">
-              Crafting digital experiences that push the boundaries of technology
+            <p className="text-xl md:text-2xl text-gray-300 mb-8 max-w-3xl mx-auto">
+              Transform your ideas into powerful digital solutions with cutting-edge technology and innovative design
+            </p>
+            <div className="flex flex-col md:flex-row gap-4 justify-center items-center">
+              <Button 
+                size="lg" 
+                className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 text-lg px-8 py-6 text-white border-none"
+                onClick={() => navigate('/submit-project')}
+              >
+                Start Your Project
+                <ArrowRight className="ml-2 h-5 w-5" />
+              </Button>
+              <Button 
+                variant="outline" 
+                size="lg" 
+                className="border-white/30 text-white hover:bg-white/10 text-lg px-8 py-6 bg-transparent"
+              >
+                <Play className="mr-2 h-5 w-5" />
+                Watch Demo
+              </Button>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Services Section */}
+      <section id="services" className="relative z-10 px-6 py-20">
+        <div className="max-w-7xl mx-auto">
+          <div className="text-center mb-16">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+              What I Offer
+            </h2>
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+              Comprehensive digital solutions tailored to your business needs
             </p>
           </div>
-          
-          <div className="flex flex-col sm:flex-row gap-4 justify-center mb-12">
-            <Button 
-              size="lg" 
-              onClick={() => navigate('/submit-project')}
-              className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 relative overflow-hidden group"
-            >
-              <span className="relative z-10 flex items-center">
-                Start Your Project
-                <Rocket className="ml-2 h-5 w-5" />
-              </span>
-              <div className="absolute inset-0 bg-gradient-to-r from-purple-600 to-cyan-500 transform scale-x-0 group-hover:scale-x-100 transition-transform duration-300 origin-left"></div>
-            </Button>
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="border-white/30 text-white hover:bg-white/10 transform hover:scale-105 transition-all duration-300"
-            >
-              View Portfolio
-              <ArrowRight className="ml-2 h-5 w-5" />
-            </Button>
-          </div>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-4 md:gap-8">
-            {[
-              { icon: Briefcase, label: '50+', desc: 'Projects' },
-              { icon: Users, label: '30+', desc: 'Happy Clients' },
-              { icon: Award, label: '5+', desc: 'Years Experience' },
-              { icon: Star, label: '4.9', desc: 'Rating' }
-            ].map((stat, index) => (
-              <Card key={index} className="bg-black/20 backdrop-blur-lg border border-white/10 p-4 md:p-6 hover:bg-white/5 transform hover:scale-105 transition-all duration-300">
-                <stat.icon className="h-8 w-8 text-cyan-400 mx-auto mb-2" />
-                <div className="text-2xl md:text-3xl font-bold text-white">{stat.label}</div>
-                <div className="text-sm text-gray-400">{stat.desc}</div>
+          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6">
+            {services.map((service, index) => (
+              <Card key={index} className="bg-black/20 backdrop-blur-lg border border-white/10 p-6 hover:bg-white/5 transform hover:scale-105 transition-all duration-500 group relative overflow-hidden">
+                <div className={`absolute inset-0 bg-gradient-to-r ${service.color} opacity-0 group-hover:opacity-10 transition-opacity duration-300`}></div>
+                <div className="relative z-10">
+                  <div className={`p-3 rounded-full bg-gradient-to-r ${service.color} w-fit mb-4`}>
+                    <service.icon className="h-6 w-6 text-white" />
+                  </div>
+                  <h3 className="text-xl font-bold mb-3">{service.title}</h3>
+                  <p className="text-gray-400 mb-4">{service.description}</p>
+                  <div className="space-y-2">
+                    {service.features.map((feature, fIndex) => (
+                      <div key={fIndex} className="flex items-center text-sm text-gray-300">
+                        <CheckCircle className="h-4 w-4 text-green-400 mr-2 flex-shrink-0" />
+                        {feature}
+                      </div>
+                    ))}
+                  </div>
+                </div>
               </Card>
             ))}
           </div>
         </div>
       </section>
 
-      {/* About Section */}
-      <section id="about" className="py-20 px-4 md:px-6 relative">
-        <div className="container mx-auto max-w-6xl">
+      {/* Enhanced About Section */}
+      <section id="about" className="relative z-10 px-6 py-20 bg-black/10">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-              About Me
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+              About DevMaster
             </h2>
-            <p className="text-xl text-gray-300">Passionate about creating innovative solutions</p>
+            <p className="text-xl text-gray-400 max-w-3xl mx-auto">
+              Passionate developer with a mission to create exceptional digital experiences
+            </p>
           </div>
-          
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-6 animate-fade-in">
-              <p className="text-lg text-gray-300 leading-relaxed">
-                I'm a passionate full-stack developer with over 5 years of experience creating 
-                cutting-edge web and mobile applications. My expertise spans from frontend 
-                frameworks to backend architectures, always focusing on performance and user experience.
-              </p>
-              <p className="text-lg text-gray-300 leading-relaxed">
-                I believe in writing clean, maintainable code and staying updated with the latest 
-                technologies. My goal is to help businesses transform their ideas into powerful 
-                digital solutions that drive growth and success.
-              </p>
+
+          <div className="grid lg:grid-cols-2 gap-12 items-center mb-16">
+            {/* Profile Section */}
+            <div className="space-y-6">
+              <div className="relative">
+                <img 
+                  src="/placeholder.svg" 
+                  alt="DevMaster Profile" 
+                  className="w-64 h-64 rounded-full mx-auto lg:mx-0 object-cover border-4 border-gradient-to-r from-cyan-500 to-purple-600"
+                />
+                <div className="absolute -bottom-4 -right-4 bg-gradient-to-r from-green-500 to-emerald-600 rounded-full p-3">
+                  <Coffee className="h-8 w-8 text-white" />
+                </div>
+              </div>
+              
+              <div className="text-center lg:text-left">
+                <h3 className="text-2xl font-bold mb-2">Ahmed Al-Mashrafi</h3>
+                <p className="text-cyan-400 mb-4">Senior Full-Stack Developer & UI/UX Designer</p>
+                <p className="text-gray-300 leading-relaxed mb-6">
+                  With over 8 years of experience in the tech industry, I specialize in creating innovative 
+                  digital solutions that drive business growth. My passion lies in combining cutting-edge 
+                  technology with beautiful design to deliver exceptional user experiences.
+                </p>
+                
+                {/* Social Links */}
+                <div className="flex justify-center lg:justify-start space-x-4">
+                  <Button variant="outline" size="sm" className="border-white/30 text-white hover:bg-white/10 bg-transparent">
+                    <Github className="h-4 w-4" />
+                  </Button>
+                  <Button variant="outline" size="sm" className="border-white/30 text-white hover:bg-white/10 bg-transparent">
+                    <Linkedin className="h-4 w-4" />
+                  </Button>
+                  <Button variant="outline" size="sm" className="border-white/30 text-white hover:bg-white/10 bg-transparent">
+                    <Mail className="h-4 w-4" />
+                  </Button>
+                </div>
+              </div>
+            </div>
+
+            {/* Stats & Skills */}
+            <div className="space-y-8">
+              {/* Stats Grid */}
               <div className="grid grid-cols-2 gap-4">
-                {[
-                  { icon: Target, label: 'Goal-Oriented' },
-                  { icon: Brain, label: 'Creative Thinker' },
-                  { icon: Shield, label: 'Quality Focused' },
-                  { icon: Clock, label: 'Timely Delivery' }
-                ].map((trait, index) => (
-                  <div key={index} className="flex items-center space-x-3">
-                    <trait.icon className="h-6 w-6 text-cyan-400" />
-                    <span className="text-gray-300">{trait.label}</span>
+                {aboutStats.map((stat, index) => (
+                  <Card key={index} className="bg-black/20 backdrop-blur-lg border border-white/10 p-4 text-center">
+                    <stat.icon className={`h-8 w-8 mx-auto mb-2 ${stat.color}`} />
+                    <div className="text-2xl font-bold text-white mb-1">{stat.value}</div>
+                    <div className="text-gray-400 text-sm">{stat.label}</div>
+                  </Card>
+                ))}
+              </div>
+
+              {/* Skills */}
+              <div className="space-y-4">
+                <h4 className="text-xl font-bold text-white">Technical Expertise</h4>
+                {skills.map((skill, index) => (
+                  <div key={index} className="space-y-2">
+                    <div className="flex justify-between">
+                      <span className="text-gray-300">{skill.name}</span>
+                      <span className="text-gray-400">{skill.level}%</span>
+                    </div>
+                    <div className="w-full bg-white/10 rounded-full h-2">
+                      <div 
+                        className={`h-2 rounded-full ${skill.color} transition-all duration-1000`}
+                        style={{ width: `${skill.level}%` }}
+                      ></div>
+                    </div>
                   </div>
                 ))}
               </div>
             </div>
-            
-            <div className="space-y-6">
-              <h3 className="text-2xl font-bold text-cyan-400 mb-6">Technical Skills</h3>
-              {skills.map((skill, index) => (
-                <div key={index} className="space-y-2">
-                  <div className="flex items-center justify-between">
-                    <div className="flex items-center space-x-3">
-                      <skill.icon className="h-5 w-5 text-purple-400" />
-                      <span className="text-white font-medium">{skill.name}</span>
-                    </div>
-                    <span className="text-cyan-400 font-semibold">{skill.level}%</span>
+          </div>
+
+          {/* Timeline */}
+          <div className="mb-16">
+            <h3 className="text-2xl font-bold text-center mb-8 text-white">Professional Journey</h3>
+            <div className="relative">
+              <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-cyan-500 to-purple-600"></div>
+              {timeline.map((item, index) => (
+                <div key={index} className={`flex items-center mb-8 ${index % 2 === 0 ? 'flex-row' : 'flex-row-reverse'}`}>
+                  <div className={`w-1/2 ${index % 2 === 0 ? 'pr-8 text-right' : 'pl-8 text-left'}`}>
+                    <Card className="bg-black/20 backdrop-blur-lg border border-white/10 p-4">
+                      <div className="text-cyan-400 font-bold text-lg">{item.year}</div>
+                      <h4 className="text-white font-semibold mb-2">{item.title}</h4>
+                      <p className="text-gray-400 text-sm">{item.description}</p>
+                    </Card>
                   </div>
-                  <div className="w-full bg-gray-700 rounded-full h-2">
-                    <div 
-                      className="bg-gradient-to-r from-cyan-500 to-purple-600 h-2 rounded-full transition-all duration-1000"
-                      style={{ width: `${skill.level}%` }}
-                    ></div>
+                  <div className="w-12 h-12 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full flex items-center justify-center relative z-10">
+                    <item.icon className="h-6 w-6 text-white" />
                   </div>
+                  <div className="w-1/2"></div>
                 </div>
+              ))}
+            </div>
+          </div>
+
+          {/* Contact Methods */}
+          <div className="text-center">
+            <h3 className="text-2xl font-bold mb-8 text-white">Let's Connect</h3>
+            <div className="grid md:grid-cols-3 gap-6 max-w-3xl mx-auto">
+              {contactMethods.map((method, index) => (
+                <Card 
+                  key={index} 
+                  className="bg-black/20 backdrop-blur-lg border border-white/10 p-6 hover:bg-white/5 transition-colors cursor-pointer"
+                  onClick={method.action}
+                >
+                  <method.icon className="h-8 w-8 text-cyan-400 mx-auto mb-3" />
+                  <div className="text-white font-semibold mb-1">{method.label}</div>
+                  <div className="text-gray-400 text-sm">{method.value}</div>
+                </Card>
               ))}
             </div>
           </div>
         </div>
       </section>
 
-      {/* Experience Timeline */}
-      <section id="experience" className="py-20 px-4 md:px-6 relative">
-        <div className="container mx-auto max-w-6xl">
+      {/* Portfolio Section */}
+      <section id="portfolio" className="relative z-10 px-6 py-20">
+        <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-              Experience Journey
-            </h2>
-            <p className="text-xl text-gray-300">My professional development timeline</p>
-          </div>
-          
-          <div className="relative">
-            <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 h-full w-0.5 bg-gradient-to-b from-cyan-500 to-purple-600"></div>
-            
-            {experience.map((exp, index) => (
-              <div key={index} className={`relative flex items-center mb-12 ${index % 2 === 0 ? 'md:flex-row' : 'md:flex-row-reverse'}`}>
-                <div className={`w-full md:w-1/2 ${index % 2 === 0 ? 'md:pr-8' : 'md:pl-8'}`}>
-                  <Card className="bg-black/20 backdrop-blur-lg border border-white/10 p-6 hover:bg-white/5 transform hover:scale-105 transition-all duration-300">
-                    <div className="flex items-center justify-between mb-4">
-                      <Badge className="bg-gradient-to-r from-cyan-500 to-purple-600 text-white">
-                        {exp.year}
-                      </Badge>
-                      <GraduationCap className="h-6 w-6 text-cyan-400" />
-                    </div>
-                    <h3 className="text-xl font-bold text-cyan-400 mb-2">{exp.title}</h3>
-                    <p className="text-purple-400 font-medium mb-3">{exp.company}</p>
-                    <p className="text-gray-300 mb-4">{exp.description}</p>
-                    <ul className="space-y-2">
-                      {exp.achievements.map((achievement, i) => (
-                        <li key={i} className="flex items-center space-x-2">
-                          <CheckCircle className="h-4 w-4 text-green-400 flex-shrink-0" />
-                          <span className="text-gray-400 text-sm">{achievement}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </Card>
-                </div>
-                
-                <div className="absolute left-4 md:left-1/2 transform md:-translate-x-1/2 w-8 h-8 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full flex items-center justify-center">
-                  <div className="w-4 h-4 bg-white rounded-full"></div>
-                </div>
-              </div>
-            ))}
-          </div>
-        </div>
-      </section>
-
-      {/* Featured Projects */}
-      <section id="projects" className="py-20 px-4 md:px-6 relative">
-        <div className="container mx-auto max-w-6xl">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+            <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
               Featured Projects
             </h2>
-            <p className="text-xl text-gray-300">Showcasing my latest and greatest work</p>
+            <p className="text-xl text-gray-400">Recent work that showcases my expertise</p>
           </div>
-          
+
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {featuredProjects.map((project, index) => (
-              <Card 
-                key={index} 
-                className="bg-black/20 backdrop-blur-lg border border-white/10 overflow-hidden hover:bg-white/5 transform hover:scale-105 transition-all duration-500 cursor-pointer group"
-                onClick={() => setActiveProject(index)}
-              >
-                <div className="aspect-video bg-gradient-to-br from-cyan-500/20 to-purple-600/20 relative overflow-hidden">
-                  <img 
-                    src={project.image} 
-                    alt={project.title}
-                    className="w-full h-full object-cover transition-transform duration-500 group-hover:scale-110"
-                  />
-                  <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
-                  <div className="absolute top-4 right-4">
-                    <Badge className="bg-green-500 text-white">Featured</Badge>
+            {projects.map((project, index) => (
+              <Card key={index} className="bg-black/20 backdrop-blur-lg border border-white/10 overflow-hidden group hover:border-cyan-400/50 transition-all duration-500 transform hover:scale-105">
+                <div className="relative overflow-hidden">
+                  <img src={project.image} alt={project.title} className="w-full h-48 object-cover group-hover:scale-110 transition-transform duration-500" />
+                  <div className="absolute inset-0 bg-black/0 group-hover:bg-black/50 transition-colors duration-300 flex items-center justify-center">
+                    <Button variant="outline" className="opacity-0 group-hover:opacity-100 transition-opacity duration-300 border-white text-white hover:bg-white/20 bg-transparent">
+                      <ExternalLink className="mr-2 h-4 w-4" />
+                      View Project
+                    </Button>
                   </div>
                 </div>
-                
                 <div className="p-6">
-                  <h3 className="text-xl font-bold text-cyan-400 mb-2">{project.title}</h3>
-                  <p className="text-gray-300 mb-4 text-sm">{project.description}</p>
-                  
-                  <div className="flex flex-wrap gap-2 mb-4">
-                    {project.tech.map((tech, i) => (
-                      <Badge key={i} variant="secondary" className="bg-purple-500/20 text-purple-300 border-purple-500/30">
-                        {tech}
+                  <h3 className="text-xl font-bold text-white mb-2">{project.title}</h3>
+                  <p className="text-gray-400 mb-4">{project.description}</p>
+                  <div className="flex flex-wrap gap-2">
+                    {project.tags.map((tag, tagIndex) => (
+                      <Badge key={tagIndex} variant="secondary" className="bg-white/10 text-gray-300">
+                        {tag}
                       </Badge>
                     ))}
-                  </div>
-                  
-                  <div className="flex space-x-3">
-                    <Button 
-                      size="sm" 
-                      variant="outline"
-                      className="border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10 flex-1"
-                    >
-                      <ExternalLink className="mr-2 h-4 w-4" />
-                      Live Demo
-                    </Button>
-                    <Button 
-                      size="sm" 
-                      variant="outline"
-                      className="border-purple-400/50 text-purple-400 hover:bg-purple-400/10 flex-1"
-                    >
-                      <Github className="mr-2 h-4 w-4" />
-                      Code
-                    </Button>
                   </div>
                 </div>
               </Card>
             ))}
           </div>
-          
+
           <div className="text-center mt-12">
-            <Button 
-              variant="outline" 
-              size="lg"
-              className="border-white/30 text-white hover:bg-white/10 transform hover:scale-105 transition-all duration-300"
-            >
+            <Button variant="outline" className="border-white/30 text-white hover:bg-white/10 bg-transparent">
               View All Projects
-              <ArrowRight className="ml-2 h-5 w-5" />
+              <ArrowRight className="ml-2 h-4 w-4" />
             </Button>
           </div>
         </div>
       </section>
 
-      {/* Contact Section */}
-      <section id="contact" className="py-20 px-4 md:px-6 relative">
-        <div className="container mx-auto max-w-4xl">
-          <div className="text-center mb-16">
-            <h2 className="text-4xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-              Let's Work Together
-            </h2>
-            <p className="text-xl text-gray-300">Ready to bring your ideas to life?</p>
-          </div>
-          
-          <div className="grid md:grid-cols-2 gap-12">
-            <div className="space-y-8">
-              <div className="space-y-6">
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-lg flex items-center justify-center">
-                    <Mail className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <p className="text-gray-400">Email</p>
-                    <p className="text-white font-medium">contact@devmaster.com</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-lg flex items-center justify-center">
-                    <Phone className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <p className="text-gray-400">Phone</p>
-                    <p className="text-white font-medium">+968 9123 4567</p>
-                  </div>
-                </div>
-                
-                <div className="flex items-center space-x-4">
-                  <div className="w-12 h-12 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-lg flex items-center justify-center">
-                    <MapPin className="h-6 w-6 text-white" />
-                  </div>
-                  <div>
-                    <p className="text-gray-400">Location</p>
-                    <p className="text-white font-medium">Muscat, Oman</p>
-                  </div>
-                </div>
+      {/* Testimonials Section */}
+      <section className="relative z-10 px-6 py-20 bg-black/10">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl md:text-5xl font-bold mb-16 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+            Client Testimonials
+          </h2>
+
+          <Card className="bg-black/20 backdrop-blur-lg border border-white/10 p-8 md:p-12 relative overflow-hidden">
+            <div className="absolute inset-0 bg-gradient-to-r from-cyan-500/5 to-purple-500/5"></div>
+            <div className="relative z-10">
+              <div className="flex justify-center mb-6">
+                {[...Array(testimonials[currentTestimonial].rating)].map((_, i) => (
+                  <Star key={i} className="h-6 w-6 text-yellow-400 fill-current" />
+                ))}
               </div>
-              
-              <div className="flex space-x-4">
-                <Button variant="outline" size="sm" className="border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10">
-                  <Github className="h-4 w-4" />
-                </Button>
-                <Button variant="outline" size="sm" className="border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10">
-                  <Linkedin className="h-4 w-4" />
-                </Button>
-                <Button variant="outline" size="sm" className="border-cyan-400/50 text-cyan-400 hover:bg-cyan-400/10">
-                  <Twitter className="h-4 w-4" />
-                </Button>
+              <blockquote className="text-xl md:text-2xl text-gray-300 mb-8 font-light italic">
+                "{testimonials[currentTestimonial].content}"
+              </blockquote>
+              <div className="flex items-center justify-center space-x-4">
+                <img 
+                  src={testimonials[currentTestimonial].image} 
+                  alt={testimonials[currentTestimonial].name}
+                  className="w-12 h-12 rounded-full object-cover"
+                />
+                <div className="text-left">
+                  <div className="font-semibold text-white">{testimonials[currentTestimonial].name}</div>
+                  <div className="text-gray-400 text-sm">{testimonials[currentTestimonial].role}</div>
+                </div>
               </div>
             </div>
-            
-            <Card className="bg-black/20 backdrop-blur-lg border border-white/10 p-6">
-              <h3 className="text-xl font-bold text-cyan-400 mb-6">Quick Message</h3>
-              <div className="space-y-4">
-                <input 
-                  type="text" 
-                  placeholder="Your Name" 
-                  className="w-full p-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none transition-colors"
-                />
-                <input 
-                  type="email" 
-                  placeholder="Your Email" 
-                  className="w-full p-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none transition-colors"
-                />
-                <textarea 
-                  placeholder="Your Message" 
-                  rows={4}
-                  className="w-full p-3 bg-white/5 border border-white/20 rounded-lg text-white placeholder-gray-400 focus:border-cyan-400 focus:outline-none transition-colors resize-none"
-                ></textarea>
-                <Button className="w-full bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300">
-                  Send Message
-                  <ArrowRight className="ml-2 h-4 w-4" />
-                </Button>
-              </div>
-            </Card>
+          </Card>
+
+          <div className="flex justify-center space-x-2 mt-8">
+            {testimonials.map((_, index) => (
+              <button
+                key={index}
+                className={`w-3 h-3 rounded-full transition-all duration-300 ${
+                  index === currentTestimonial ? 'bg-cyan-400' : 'bg-white/30'
+                }`}
+                onClick={() => setCurrentTestimonial(index)}
+              />
+            ))}
+          </div>
+        </div>
+      </section>
+
+      {/* Contact Section */}
+      <section id="contact" className="relative z-10 px-6 py-20">
+        <div className="max-w-4xl mx-auto text-center">
+          <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+            Ready to Start?
+          </h2>
+          <p className="text-xl text-gray-400 mb-12">
+            Let's discuss your project and bring your ideas to life
+          </p>
+
+          <div className="flex flex-col md:flex-row gap-6 justify-center">
+            <Button 
+              size="lg" 
+              className="bg-gradient-to-r from-cyan-500 to-purple-600 hover:from-cyan-600 hover:to-purple-700 transform hover:scale-105 transition-all duration-300 text-lg px-8 py-6 text-white border-none"
+              onClick={() => navigate('/submit-project')}
+            >
+              Submit Your Project
+              <ArrowRight className="ml-2 h-5 w-5" />
+            </Button>
+            <Button 
+              variant="outline" 
+              size="lg" 
+              className="border-white/30 text-white hover:bg-white/10 text-lg px-8 py-6 bg-transparent"
+              onClick={() => window.open('mailto:hello@devmaster.com')}
+            >
+              <Mail className="mr-2 h-5 w-5" />
+              Send Email
+            </Button>
           </div>
         </div>
       </section>
 
       {/* Footer */}
-      <footer className="py-12 px-4 md:px-6 border-t border-white/10 bg-black/20 backdrop-blur-lg">
-        <div className="container mx-auto max-w-6xl">
-          <div className="flex flex-col md:flex-row items-center justify-between">
-            <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-4 md:mb-0">
-              DevMaster
-            </div>
-            <div className="flex flex-col md:flex-row items-center space-y-4 md:space-y-0 md:space-x-8">
-              <div className="flex space-x-6">
-                <a href="/privacy" className="text-gray-400 hover:text-cyan-400 transition-colors duration-300">Privacy</a>
-                <a href="/terms" className="text-gray-400 hover:text-cyan-400 transition-colors duration-300">Terms</a>
+      <footer className="relative z-10 bg-black/20 backdrop-blur-lg border-t border-white/10 px-6 py-12">
+        <div className="max-w-7xl mx-auto">
+          <div className="grid md:grid-cols-4 gap-8">
+            <div className="md:col-span-2">
+              <div className="flex items-center mb-4">
+                <Zap className="h-6 w-6 text-cyan-400 mr-2" />
+                <span className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
+                  DevMaster
+                </span>
               </div>
-              <p className="text-gray-400 text-sm">© 2024 DevMaster. All rights reserved.</p>
+              <p className="text-gray-400 max-w-md">
+                Transforming ideas into exceptional digital experiences with cutting-edge technology and innovative design.
+              </p>
             </div>
+            
+            <div>
+              <h3 className="text-white font-semibold mb-4">Quick Links</h3>
+              <div className="space-y-2">
+                <div><a href="#services" className="text-gray-400 hover:text-cyan-400 transition-colors cursor-pointer">Services</a></div>
+                <div><a href="#about" className="text-gray-400 hover:text-cyan-400 transition-colors cursor-pointer">About</a></div>
+                <div><a href="#portfolio" className="text-gray-400 hover:text-cyan-400 transition-colors cursor-pointer">Portfolio</a></div>
+                <div><a href="#contact" className="text-gray-400 hover:text-cyan-400 transition-colors cursor-pointer">Contact</a></div>
+              </div>
+            </div>
+            
+            <div>
+              <h3 className="text-white font-semibold mb-4">Legal</h3>
+              <div className="space-y-2">
+                <div><Button variant="link" className="text-gray-400 hover:text-cyan-400 p-0 h-auto" onClick={() => navigate('/privacy')}>Privacy Policy</Button></div>
+                <div><Button variant="link" className="text-gray-400 hover:text-cyan-400 p-0 h-auto" onClick={() => navigate('/terms')}>Terms of Service</Button></div>
+              </div>
+            </div>
+          </div>
+          
+          <div className="border-t border-white/10 mt-8 pt-8 text-center text-gray-400">
+            <p>&copy; 2024 DevMaster. All rights reserved. Made with <Heart className="inline h-4 w-4 text-red-400" /> in Oman</p>
           </div>
         </div>
       </footer>
