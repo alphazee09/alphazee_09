@@ -53,6 +53,11 @@ const Dashboard = () => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
   const [selectedProject, setSelectedProject] = useState<any>(null);
 
+  const [projects, setProjects] = useState([]);
+  const [messages, setMessages] = useState([]);
+  const [payments, setPayments] = useState([]);
+  const [loading, setLoading] = useState(true);
+
   useEffect(() => {
     setIsLoaded(true);
     
@@ -61,104 +66,53 @@ const Dashboard = () => {
     };
 
     window.addEventListener('mousemove', handleMouseMove);
+    
+    // Fetch data from backend
+    fetchDashboardData();
+    
     return () => window.removeEventListener('mousemove', handleMouseMove);
   }, []);
 
-  const projects = [
-    {
-      id: 1,
-      name: 'E-Commerce Platform',
-      status: 'in-progress',
-      progress: 65,
-      budget: '15,000 OMR',
-      deadline: '2024-02-15',
-      lastUpdate: '2 days ago',
-      description: 'Full-stack e-commerce solution with payment integration',
-      files: 12,
-      messages: 8
-    },
-    {
-      id: 2,
-      name: 'Mobile App UI/UX',
-      status: 'review',
-      progress: 90,
-      budget: '8,500 OMR',
-      deadline: '2024-01-30',
-      lastUpdate: '1 day ago',
-      description: 'Modern mobile application design and development',
-      files: 24,
-      messages: 15
-    },
-    {
-      id: 3,
-      name: 'API Development',
-      status: 'completed',
-      progress: 100,
-      budget: '5,000 OMR',
-      deadline: '2024-01-15',
-      lastUpdate: '1 week ago',
-      description: 'RESTful API with authentication and database integration',
-      files: 8,
-      messages: 12
-    }
-  ];
+  const fetchDashboardData = async () => {
+    try {
+      const token = localStorage.getItem('token');
+      if (!token) {
+        navigate('/login');
+        return;
+      }
 
-  const messages = [
-    {
-      id: 1,
-      from: 'DevMaster',
-      content: 'Project milestone completed! The authentication system is now ready for testing.',
-      time: '2 hours ago',
-      type: 'update',
-      projectId: 1
-    },
-    {
-      id: 2,
-      from: 'John Doe',
-      content: 'Great work on the UI! Could we adjust the color scheme slightly?',
-      time: '1 day ago',
-      type: 'feedback',
-      projectId: 2
-    },
-    {
-      id: 3,
-      from: 'DevMaster',
-      content: 'Invoice for milestone 2 has been generated. Please review and approve.',
-      time: '3 days ago',
-      type: 'invoice',
-      projectId: 1
-    }
-  ];
+      const headers = {
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      };
 
-  const payments = [
-    {
-      id: 1,
-      projectName: 'E-Commerce Platform',
-      amount: '7,500 OMR',
-      status: 'paid',
-      date: '2024-01-10',
-      method: 'Credit Card',
-      milestone: 'Milestone 1'
-    },
-    {
-      id: 2,
-      projectName: 'Mobile App UI/UX',
-      amount: '4,250 OMR',
-      status: 'pending',
-      date: '2024-01-15',
-      method: 'Bank Transfer',
-      milestone: 'Milestone 2'
-    },
-    {
-      id: 3,
-      projectName: 'API Development',
-      amount: '5,000 OMR',
-      status: 'paid',
-      date: '2024-01-05',
-      method: 'PayPal',
-      milestone: 'Final Payment'
+      // Fetch projects
+      const projectsResponse = await fetch('http://localhost:5002/api/projects', { headers });
+      if (projectsResponse.ok) {
+        const projectsData = await projectsResponse.json();
+        setProjects(projectsData.projects || []);
+      }
+
+      // Fetch messages
+      const messagesResponse = await fetch('http://localhost:5002/api/messages', { headers });
+      if (messagesResponse.ok) {
+        const messagesData = await messagesResponse.json();
+        setMessages(messagesData.messages || []);
+      }
+
+      // Fetch payments
+      const paymentsResponse = await fetch('http://localhost:5002/api/payments', { headers });
+      if (paymentsResponse.ok) {
+        const paymentsData = await paymentsResponse.json();
+        setPayments(paymentsData.payments || []);
+      }
+
+    } catch (error) {
+      console.error('Error fetching dashboard data:', error);
+    } finally {
+      setLoading(false);
     }
-  ];
+  };
 
   const getStatusColor = (status: string) => {
     switch (status) {

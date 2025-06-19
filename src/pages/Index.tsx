@@ -306,12 +306,16 @@ const Index = () => {
             <div className="space-y-6">
               <div className="relative">
                 <img 
-                  src="/placeholder.svg" 
+                  src="/mazinyahia.png" 
                   alt="Mazin Yahia Profile" 
                   className="w-64 h-64 rounded-full mx-auto lg:mx-0 object-cover border-4 border-gradient-to-r from-cyan-500 to-purple-600"
                 />
-                <div className="absolute -bottom-4 -right-4 bg-gradient-to-r from-red-500 via-white to-black rounded-full p-3">
-                  <Flag className="h-8 w-8 text-red-500" />
+                <div className="absolute -bottom-4 -right-4 w-16 h-16 rounded-full overflow-hidden border-2 border-white">
+                  <img 
+                    src="/sdn.jpg" 
+                    alt="Sudan Flag" 
+                    className="w-full h-full object-cover"
+                  />
                 </div>
               </div>
               
@@ -529,7 +533,14 @@ const Index = () => {
           </div>
           
           <div className="border-t border-white/10 mt-8 pt-8 text-center text-gray-400">
-            <p>&copy; 2025 Alphazee09. All rights reserved. Made with <Heart className="inline h-4 w-4 text-red-400" /> in Sudan</p>
+            <div className="flex items-center justify-center space-x-2">
+              <p>&copy; 2025 Alphazee09. All rights reserved. Crafted & Created By Eng.MazinYahia</p>
+              <img 
+                src="/footer.png" 
+                alt="Sudan Flag Heart" 
+                className="w-6 h-6 inline-block"
+              />
+            </div>
           </div>
         </div>
       </footer>

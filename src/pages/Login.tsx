@@ -54,11 +54,35 @@ const Login = () => {
       return;
     }
 
-    // Simulate login process
-    setTimeout(() => {
+    try {
+      const response = await fetch('http://localhost:5002/api/auth/login', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+        },
+        body: JSON.stringify({
+          email: email,
+          password: password
+        }),
+      });
+
+      const data = await response.json();
+
+      if (response.ok) {
+        // Store the token
+        localStorage.setItem('token', data.access_token);
+        localStorage.setItem('user', JSON.stringify(data.user));
+        
+        // Navigate to dashboard
+        navigate('/dashboard');
+      } else {
+        setFormErrors(prev => ({ ...prev, password: data.error || 'Login failed' }));
+      }
+    } catch (error) {
+      setFormErrors(prev => ({ ...prev, password: 'Network error. Please try again.' }));
+    } finally {
       setIsLoading(false);
-      navigate('/dashboard');
-    }, 2000);
+    }
   };
 
   const handleSocialLogin = (provider: string) => {
@@ -242,7 +266,7 @@ const Login = () => {
             <div className="mt-8 text-center space-y-4">
               <p className="text-gray-400 text-sm">
                 Don't have an account?{' '}
-                <Button variant="link" className="text-cyan-400 hover:text-cyan-300 p-0 h-auto">
+                <Button variant="link" className="text-cyan-400 hover:text-cyan-300 p-0 h-auto" onClick={() => navigate('/signup')}>
                   Sign up
                 </Button>
               </p>
