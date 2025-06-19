@@ -7,7 +7,7 @@ import { Label } from "@/components/ui/label";
 import { Textarea } from "@/components/ui/textarea";
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from "@/components/ui/select";
 import { Badge } from "@/components/ui/badge";
-import { ArrowLeft, ArrowRight, CheckCircle, Circle, Lightbulb, Code, Rocket, DollarSign, Zap, Star, Target, Brain } from 'lucide-react';
+import { ArrowLeft, ArrowRight, CheckCircle, Circle, Lightbulb, Code, Rocket, DollarSign, Star, Target, Brain } from 'lucide-react';
 
 const SubmitProject = () => {
   const navigate = useNavigate();
@@ -70,7 +70,7 @@ const SubmitProject = () => {
       id: 'api', 
       title: 'API Development', 
       description: 'Backend APIs and microservices',
-      icon: Zap,
+      icon: () => <img src="/logo.png" alt="API" className="h-6 w-6" />,
       color: 'from-yellow-500 to-orange-500'
     },
     { 
@@ -290,7 +290,7 @@ const SubmitProject = () => {
                         <span className="text-gray-300">Identify your target audience</span>
                       </div>
                       <div className="flex items-center space-x-3">
-                        <Zap className="h-5 w-5 text-purple-400" />
+                        <img src="/logo.png" alt="Alphazee09 Logo" className="h-5 w-5 mr-1" />
                         <span className="text-gray-300">Highlight unique features</span>
                       </div>
                     </div>

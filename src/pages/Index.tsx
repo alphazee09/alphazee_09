@@ -207,7 +207,7 @@ const Index = () => {
       <nav className="relative z-10 p-6 bg-black/20 backdrop-blur-lg border-b border-white/10">
         <div className="max-w-7xl mx-auto flex justify-between items-center">
           <div className="text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent flex items-center">
-            <Zap className="mr-2 h-6 w-6 text-cyan-400" />
+            <img src="/logo.png" alt="Alphazee09 Logo" className="mr-2 h-8 w-8" />
             Alphazee09
           </div>
           <div className="hidden md:flex space-x-8">
@@ -293,6 +293,15 @@ const Index = () => {
       <section id="about" className="relative z-10 px-6 py-20 bg-black/10">
         <div className="max-w-7xl mx-auto">
           <div className="text-center mb-16">
+            <div className="flex justify-center mb-4">
+              <div className="w-16 h-16 rounded-full overflow-hidden border-2 border-white">
+                <img 
+                  src="/sdn.jpg" 
+                  alt="Sudan Flag" 
+                  className="w-full h-full object-cover"
+                />
+              </div>
+            </div>
             <h2 className="text-3xl md:text-5xl font-bold mb-4 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
               About Alphazee09
             </h2>
@@ -310,13 +319,6 @@ const Index = () => {
                   alt="Mazin Yahia Profile" 
                   className="w-64 h-64 rounded-full mx-auto lg:mx-0 object-cover border-4 border-gradient-to-r from-cyan-500 to-purple-600"
                 />
-                <div className="absolute -bottom-4 -right-4 w-16 h-16 rounded-full overflow-hidden border-2 border-white">
-                  <img 
-                    src="/sdn.jpg" 
-                    alt="Sudan Flag" 
-                    className="w-full h-full object-cover"
-                  />
-                </div>
               </div>
               
               <div className="text-center lg:text-left">

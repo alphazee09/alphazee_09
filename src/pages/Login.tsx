@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
@@ -13,7 +12,6 @@ import {
   Mail, 
   Lock, 
   ArrowRight, 
-  Zap, 
   Shield, 
   Star, 
   Sparkles,
@@ -136,7 +134,7 @@ const Login = () => {
         {/* Logo Section */}
         <div className="text-center mb-8 animate-fade-in">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full mb-4 transform hover:scale-110 transition-transform duration-300">
-            <Zap className="h-8 w-8 text-white" />
+            <img src="/logo.png" alt="Alphazee09 Logo" className="h-8 w-8" />
           </div>
           <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-2">
             Welcome Back
@@ -320,7 +318,7 @@ const Login = () => {
               <span className="text-xs text-gray-400">SSL Secured</span>
             </div>
             <div className="flex items-center space-x-1">
-              <Zap className="h-4 w-4 text-yellow-400" />
+              <img src="/logo.png" alt="Fast Login" className="h-4 w-4 mr-1" />
               <span className="text-xs text-gray-400">Fast Login</span>
             </div>
             <div className="flex items-center space-x-1">
@@ -335,3 +333,4 @@ const Login = () => {
 };
 
 export default Login;
+

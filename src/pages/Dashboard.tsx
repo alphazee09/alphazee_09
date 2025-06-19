@@ -40,7 +40,6 @@ import {
   Video,
   Phone,
   Star,
-  Zap,
   Menu,
   X
 } from 'lucide-react';
@@ -155,11 +154,9 @@ const Dashboard = () => {
     <div className="flex flex-col h-full">
       <div className="p-4 md:p-6 flex-1">
         <div className="text-xl md:text-2xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-6 md:mb-8 flex items-center">
-          <Zap className="mr-2 h-5 w-5 md:h-6 md:w-6 text-cyan-400" />
+          <img src="/logo.png" alt="Alphazee09 Logo" className="mr-2 h-5 w-5 md:h-6 md:w-6" />
           <span className="hidden md:inline">Client Portal</span>
-        </div>
-        
-        <nav className="space-y-1 md:space-y-2">
+        </div><nav className="space-y-1 md:space-y-2">
           {sidebarItems.map((item, index) => (
             <Button 
               key={item.key}
@@ -305,7 +302,7 @@ const Dashboard = () => {
                     <div className="flex flex-col md:flex-row md:justify-between md:items-center gap-4">
                       <div>
                         <h1 className="text-3xl md:text-4xl font-bold mb-2 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">
-                          Welcome back, John! ⚡
+                          Welcome back, John! <img src="/logo.png" alt="Alphazee09 Logo" className="inline-block h-6 w-6 align-middle" />
                         </h1>
                         <p className="text-gray-300">Here's what's happening with your projects</p>
                       </div>

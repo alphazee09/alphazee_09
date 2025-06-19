@@ -5,7 +5,7 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card";
 import InlineSpinner from "@/components/InlineSpinner";
-import { ArrowLeft, Eye, EyeOff, Zap, User, Mail, Phone, Building, Lock, CheckCircle, Sparkles } from "lucide-react";
+import { ArrowLeft, Eye, EyeOff, User, Mail, Phone, Building, Lock, CheckCircle, Sparkles } from "lucide-react";
 
 export default function Signup() {
   const navigate = useNavigate();
@@ -193,7 +193,7 @@ export default function Signup() {
           <div className="text-center mb-8">
             <div className="flex justify-center mb-4">
               <div className="p-3 rounded-full bg-gradient-to-r from-cyan-500 to-purple-600">
-                <Zap className="h-8 w-8 text-white" />
+                <img src="/logo.png" alt="Alphazee09 Logo" className="h-8 w-8" />
               </div>
             </div>
             <h1 className="text-3xl font-bold mb-2 bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent">

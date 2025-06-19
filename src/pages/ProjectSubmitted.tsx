@@ -2,7 +2,7 @@
 import { useNavigate } from 'react-router-dom';
 import { Button } from "@/components/ui/button";
 import { Card } from "@/components/ui/card";
-import { CheckCircle, ArrowRight, Home, MessageSquare, Zap, Star, Clock, Award, Target } from 'lucide-react';
+import { CheckCircle, ArrowRight, Home, MessageSquare, Star, Clock, Award, Target } from 'lucide-react';
 
 const ProjectSubmitted = () => {
   const navigate = useNavigate();
@@ -70,7 +70,7 @@ const ProjectSubmitted = () => {
 
             <div className="bg-black/20 rounded-xl p-6 md:p-8 mb-8 border border-white/10">
               <h3 className="text-2xl font-semibold mb-6 text-cyan-400 flex items-center justify-center">
-                <Zap className="mr-2 h-6 w-6" />
+                <img src="/logo.png" alt="Alphazee09 Logo" className="mr-2 h-6 w-6" />
                 What happens next?
               </h3>
               <div className="grid md:grid-cols-3 gap-6">
