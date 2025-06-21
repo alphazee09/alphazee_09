@@ -133,7 +133,7 @@ const Login = () => {
       <div className="relative z-10 w-full max-w-md">
         {/* Logo Section */}
         <div className="text-center mb-8 animate-fade-in">
-          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full mb-4 transform hover:scale-110 transition-transform duration-300">
+          <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-cyan-500 to-purple-600 rounded-full mb-4 transform hover:scale-110 transition-transform duration-300 shadow-lg">
             <img src="/logo.png" alt="Alphazee09 Logo" className="h-8 w-8" />
           </div>
           <h1 className="text-3xl font-bold bg-gradient-to-r from-cyan-400 to-purple-400 bg-clip-text text-transparent mb-2">

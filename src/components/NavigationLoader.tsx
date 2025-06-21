@@ -13,7 +13,7 @@ const NavigationLoader = () => {
     // Fixed loading time for consistent UX
     const timer = setTimeout(() => {
       stopLoading();
-    }, 1200); // Fixed 1.2 seconds for consistent experience
+    }, 2500); // Increased to 2.5 seconds for consistent experience
 
     return () => {
       clearTimeout(timer);
